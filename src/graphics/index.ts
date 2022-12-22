@@ -85,25 +85,19 @@ export default function (): ICore {
         const mouse = getMousePoint(e)
 
         if (movementPoints && activeStatePoint) {
-            const { p, q, distance: d} = movementPoints
+            const { p, q, distance: d} = movementPoints // Movement points, where P - point that the user moves, K - point that moves itself
             const { figure } = activeStatePoint
-            const a = point(figure.ax, figure.ay)
+            const a = point(figure.ax, figure.ay) // Static point
             p.bx = mouse.x
             p.by = mouse.y
 
-            console.log({d})
-
             const c = distance(point(mouse.x, mouse.y), point(figure.ax, figure.ay))
 
-            q.by = ((d * (a.y - mouse.y)) / c) + a.y
-            q.bx = ((d * (a.x - mouse.x)) / c) + a.x
-
-            console.log({bx: q.bx, by: q.by})
-            // q.bx = a.x - ((d * (a.x - mouse.x)) / c)
+            q.bx = ((d * (a.x - mouse.x)) / c) + a.x // x
+            q.by = ((d * (a.y - mouse.y)) / c) + a.y // y
 
             requestAnimationFrame(draw)
         }
-
     })
 
     stage.ctx = ctx;
